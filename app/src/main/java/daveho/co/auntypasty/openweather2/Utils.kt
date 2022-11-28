@@ -6,6 +6,7 @@ import android.net.NetworkInfo
 import android.util.Log
 import com.google.gson.Gson
 import daveho.co.auntypasty.openweather2.ApplicationModule.applicationContext
+import daveho.co.auntypasty.openweather2.model.Direction
 import org.json.JSONObject
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -63,46 +64,6 @@ object Utils {
         }
     }
 
-//    /**
-//     * Takes a json opject and converts it to OpenWeatherSearchData object
-//     * @param jsonObject json object
-//     * @return OpenWeatherSearchData object
-//     */
-//    fun convertJsonToSearchData(jsonObject: JSONObject): OpenWeatherSearchData? {
-//
-//        val gson = Gson()
-//        var searchData: OpenWeatherSearchData? = null
-//
-//        try {
-//            val jsonString = jsonObject.toString()
-//            searchData = gson.fromJson<OpenWeatherSearchData>(jsonString, OpenWeatherSearchData::class.java)
-//        } catch (e: Exception) {
-//            Log.e(TAG, "Failed to convert Json")
-//        }
-//
-//        return searchData
-//    }
-//
-//    /**
-//     * Takes a json opject and converts it to OpenWeatherForecastData object
-//     * @param jsonObject json object
-//     * @return OpenWeatherForecastData object
-//     */
-//    fun convertJsonToForecastData(jsonObject: JSONObject): OpenWeatherForecastData? {
-//
-//        val gson = Gson()
-//        var forecastData: OpenWeatherForecastData? = null
-//
-//        try {
-//            val jsonString = jsonObject.toString()
-//            forecastData = gson.fromJson<OpenWeatherForecastData>(jsonString, OpenWeatherForecastData::class.java)
-//        } catch (e: Exception) {
-//            Log.e(TAG, "Failed to convert Json")
-//        }
-//
-//        return forecastData
-//    }
-
     /**
      * Simple utility to convert speed in m/s to mph which is usually used in the UK
      * @param speed speed in m/s
@@ -129,5 +90,22 @@ object Utils {
         } else {
             ""
         }
+    }
+
+    fun windDegreeToDirection(windDegree: Float): Direction {
+
+        // Calculate which icon to show based on the angle of the wind
+        val compassDirection = when {
+            (windDegree <= 22.5) -> Direction.NORTH
+            (windDegree > 22.5 && windDegree <= 67.5) -> Direction.NORTHEAST
+            (windDegree > 67.5 && windDegree <= 112.5) -> Direction.EAST
+            (windDegree > 112.5 && windDegree <= 157.5) -> Direction.SOUTHEAST
+            (windDegree > 157.5 && windDegree <= 202.5) -> Direction.SOUTH
+            (windDegree > 202.5 && windDegree <= 247.5) -> Direction.SOUTHWEST
+            (windDegree > 247.5 && windDegree <= 292.5) -> Direction.WEST
+            (windDegree > 292.5 && windDegree <= 337.5) -> Direction.NORTHWEST
+            else -> Direction.NORTH
+        }
+        return compassDirection
     }
 }

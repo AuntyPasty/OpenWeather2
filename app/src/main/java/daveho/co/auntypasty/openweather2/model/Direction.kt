@@ -1,4 +1,4 @@
-package daveho.co.auntypasty.openweather2
+package daveho.co.auntypasty.openweather2.model
 
 enum class Direction {
     NORTH,

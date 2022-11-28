@@ -9,14 +9,14 @@ data class CityForecastResponse(
     val cod: String?,
     @SerializedName("message")
     @Expose
-    var message: Double? = null,
+    var message: Double?,
     @SerializedName("cnt")
     @Expose
-    var cnt: Int? = null,
+    var cnt: Int?,
     @SerializedName("list")
     @Expose
-    var list: List<WeatherList>? = null,
+    var list: List<WeatherList>?,
     @SerializedName("city")
     @Expose
-    var city: City? = null
+    var city: City?
 )

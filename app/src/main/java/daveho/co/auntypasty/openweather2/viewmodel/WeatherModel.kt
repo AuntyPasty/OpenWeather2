@@ -1,6 +1,6 @@
 package daveho.co.auntypasty.openweather2.viewmodel
 
-import daveho.co.auntypasty.openweather2.Direction
+import daveho.co.auntypasty.openweather2.model.Direction
 
 data class WeatherModel(
     val date: String,

@@ -7,7 +7,7 @@ import java.util.*
 
 class CityForecastFetcherImpl {
     suspend fun getCityForecast(id: Int): CityForecast {
-        val response = RetrofitClientInstance.apiService.cityForecast(id)
+        val response = RetrofitClientInstance.apiService.cityForecast(RetrofitClientInstance.API_KEY, "metric", id)
 
         return response.toDomain()
 

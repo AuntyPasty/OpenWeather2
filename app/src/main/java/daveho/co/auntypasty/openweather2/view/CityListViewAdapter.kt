@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import daveho.co.auntypasty.openweather2.Direction
+import daveho.co.auntypasty.openweather2.model.Direction
 import daveho.co.auntypasty.openweather2.R
 import daveho.co.auntypasty.openweather2.databinding.CityListItemBinding
 import daveho.co.auntypasty.openweather2.viewmodel.CitySummaryModel
@@ -40,9 +40,9 @@ internal class CityListViewAdapter(private val clickListener: (CitySummaryModel)
         cityViewHolder.bind(citySummary, clickListener)
     }
 
-    fun setList(subscribers: List<CitySummaryModel>) {
+    fun setList(cities: List<CitySummaryModel>) {
         citySummaryList.clear()
-        citySummaryList.addAll(subscribers)
+        citySummaryList.addAll(cities)
 
     }
 

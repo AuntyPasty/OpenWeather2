@@ -1,6 +1,7 @@
-package daveho.co.auntypasty.openweather2
+package daveho.co.auntypasty.openweather2.view
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -13,9 +14,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import daveho.co.auntypasty.openweather2.R
 import daveho.co.auntypasty.openweather2.databinding.ActivityMainBinding
 import daveho.co.auntypasty.openweather2.repository.CityListFetcherImpl
-import daveho.co.auntypasty.openweather2.view.CityListViewAdapter
 import daveho.co.auntypasty.openweather2.viewmodel.CityListViewModel
 import daveho.co.auntypasty.openweather2.viewmodel.CityListViewModelFactory
 import daveho.co.auntypasty.openweather2.viewmodel.CitySummaryModel
@@ -25,7 +26,7 @@ import daveho.co.auntypasty.openweather2.viewmodel.CitySummaryModel
 * Creates and commits a CityListFragment
 * Text from the search box is passed to the fragment that it holds.
 */
-class MainActivity : AppCompatActivity() {
+class MainCityListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: CityListViewAdapter
@@ -34,6 +35,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        binding.cityList.addItemDecoration(ListDividerItemDecoration(this))
 
         // Improve with DI
         val repository = CityListFetcherImpl()
@@ -44,7 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         setupSearchBar()
         initialiseCityListView()
-
     }
 
     override fun onBackPressed() {
@@ -58,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initialiseCityListView() {
-        binding.cityList.layoutManager  =LinearLayoutManager(this)
+        binding.cityList.layoutManager = LinearLayoutManager(this)
         adapter = CityListViewAdapter { selectedItem: CitySummaryModel -> listItemClicked(selectedItem) }
         binding.cityList.adapter = adapter
         displaySubscriberList()
@@ -73,7 +75,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun listItemClicked(citySummary: CitySummaryModel) {
         Toast.makeText(this, "Selected city is ${citySummary.cityName}", Toast.LENGTH_LONG).show()
-        // TODO Use the City Id to launch a new intent to show the forecast
+        val forecastIntent = Intent(this, CityForecastActivity::class.java)
+        forecastIntent.putExtra("city_id", citySummary.id)
+        startActivity(forecastIntent)
     }
 
 
