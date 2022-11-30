@@ -12,6 +12,9 @@ import kotlinx.coroutines.launch
 
 class CityForecastViewModel(private val cityForecastFetcher: CityForecastFetcherImpl): ViewModel() {
 
+    val cityName = MutableLiveData<String>()
+    val countryName = MutableLiveData<String>()
+
     private val liveCityForecast = MutableLiveData<CityForecastModel>()
     val cityForecastData : LiveData<CityForecastModel>
         get() = liveCityForecast
@@ -36,6 +39,9 @@ class CityForecastViewModel(private val cityForecastFetcher: CityForecastFetcher
             weatherList
         )
 
+        cityName.value = forecastResponse.cityName
+        countryName.value = forecastResponse.country
+
         liveCityForecast.postValue(cityForecast)
     }
 
@@ -47,20 +53,4 @@ class CityForecastViewModel(private val cityForecastFetcher: CityForecastFetcher
         windDirection = Utils.windDegreeToDirection(wind!!.deg?: 0f)
     )
 
-    private fun windDegreeToDirection(windDegree: Float): Direction {
-
-        // Calculate which icon to show based on the angle of the wind
-        val compassDirection = when {
-            (windDegree <= 22.5) -> Direction.NORTH
-            (windDegree > 22.5 && windDegree <= 67.5) -> Direction.NORTHEAST
-            (windDegree > 67.5 && windDegree <= 112.5) -> Direction.EAST
-            (windDegree > 112.5 && windDegree <= 157.5) -> Direction.SOUTHEAST
-            (windDegree > 157.5 && windDegree <= 202.5) -> Direction.SOUTH
-            (windDegree > 202.5 && windDegree <= 247.5) -> Direction.SOUTHWEST
-            (windDegree > 247.5 && windDegree <= 292.5) -> Direction.WEST
-            (windDegree > 292.5 && windDegree <= 337.5) -> Direction.NORTHWEST
-            else -> Direction.NORTH
-        }
-        return compassDirection
-    }
 }

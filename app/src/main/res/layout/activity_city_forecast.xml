@@ -37,6 +37,7 @@
                     android:id="@+id/city_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@={forecastModel.cityName}"
                     android:gravity="start"
                     android:padding="10dp"
 
@@ -52,6 +53,7 @@
                     android:padding="10dp"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
+                    android:text="@={forecastModel.countryName}"
                     android:textStyle="bold"/>
 
             </LinearLayout>
