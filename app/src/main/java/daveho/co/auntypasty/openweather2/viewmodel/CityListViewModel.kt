@@ -1,14 +1,20 @@
 package daveho.co.auntypasty.openweather2.viewmodel
 
 import androidx.lifecycle.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import daveho.co.auntypasty.openweather2.model.Direction
 import daveho.co.auntypasty.openweather2.Utils
 import daveho.co.auntypasty.openweather2.model.CitySummary
+import daveho.co.auntypasty.openweather2.repository.CityListFetcher
 import daveho.co.auntypasty.openweather2.repository.CityListFetcherImpl
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class CityListViewModel(private val cityListFetcher: CityListFetcherImpl): ViewModel() {
+@HiltViewModel
+class CityListViewModel @Inject constructor(
+    private val cityListFetcher: CityListFetcher
+    ): ViewModel() {
 
     private val liveCityList = MutableLiveData<List<CitySummaryModel>>()
     val cityListData : LiveData<List<CitySummaryModel>>

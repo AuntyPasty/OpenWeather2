@@ -6,9 +6,9 @@ import daveho.co.auntypasty.openweather2.network.RetrofitClientInstance
 import java.time.Instant
 import java.util.*
 
-class CityListFetcherImpl {
+class CityListFetcherImpl: CityListFetcher {
 
-    suspend fun findCitiesWithSearchString(searchString: String): List<CitySummary> {
+    override suspend fun findCitiesWithSearchString(searchString: String): List<CitySummary> {
         val response = RetrofitClientInstance.apiService.citySearch(RetrofitClientInstance.API_KEY, "metric", searchString)
 
         return if (!response.list.isNullOrEmpty()) {

@@ -4,13 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import daveho.co.auntypasty.openweather2.Utils
 import daveho.co.auntypasty.openweather2.model.Direction
 import daveho.co.auntypasty.openweather2.model.WeatherList
+import daveho.co.auntypasty.openweather2.repository.CityForecastFetcher
 import daveho.co.auntypasty.openweather2.repository.CityForecastFetcherImpl
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CityForecastViewModel(private val cityForecastFetcher: CityForecastFetcherImpl): ViewModel() {
+@HiltViewModel
+class CityForecastViewModel @Inject constructor(
+    private val cityForecastFetcher: CityForecastFetcher
+    ): ViewModel() {
 
     val cityName = MutableLiveData<String>()
     val countryName = MutableLiveData<String>()

@@ -10,10 +10,12 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.viewModels
 
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import daveho.co.auntypasty.openweather2.R
 import daveho.co.auntypasty.openweather2.databinding.ActivityMainBinding
 import daveho.co.auntypasty.openweather2.repository.CityListFetcherImpl
@@ -26,11 +28,13 @@ import daveho.co.auntypasty.openweather2.viewmodel.CitySummaryModel
 * Creates and commits a CityListFragment
 * Text from the search box is passed to the fragment that it holds.
 */
+@AndroidEntryPoint
 class MainCityListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: CityListViewAdapter
-    private lateinit var cityListViewModel: CityListViewModel
+  //  private lateinit var cityListViewModel: CityListViewModel
+    private val cityListViewModel: CityListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +45,7 @@ class MainCityListActivity : AppCompatActivity() {
         // Improve with DI
         val repository = CityListFetcherImpl()
         val factory = CityListViewModelFactory(repository)
-        cityListViewModel = ViewModelProvider(this, factory)[CityListViewModel::class.java]
+        //cityListViewModel = ViewModelProvider(this, factory)[CityListViewModel::class.java]
         binding.mainModel = cityListViewModel
         binding.lifecycleOwner = this
 

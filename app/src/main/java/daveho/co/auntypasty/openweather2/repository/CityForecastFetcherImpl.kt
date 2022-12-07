@@ -5,8 +5,8 @@ import daveho.co.auntypasty.openweather2.model.CityForecastResponse
 import daveho.co.auntypasty.openweather2.network.RetrofitClientInstance
 import java.util.*
 
-class CityForecastFetcherImpl {
-    suspend fun getCityForecast(id: Int): CityForecast {
+class CityForecastFetcherImpl : CityForecastFetcher {
+    override suspend fun getCityForecast(id: Int): CityForecast {
         val response = RetrofitClientInstance.apiService.cityForecast(RetrofitClientInstance.API_KEY, "metric", id)
 
         return response.toDomain()
