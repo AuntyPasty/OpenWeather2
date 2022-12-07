@@ -13,14 +13,11 @@ import android.widget.Toast
 import androidx.activity.viewModels
 
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import daveho.co.auntypasty.openweather2.R
 import daveho.co.auntypasty.openweather2.databinding.ActivityMainBinding
-import daveho.co.auntypasty.openweather2.repository.CityListFetcherImpl
 import daveho.co.auntypasty.openweather2.viewmodel.CityListViewModel
-import daveho.co.auntypasty.openweather2.viewmodel.CityListViewModelFactory
 import daveho.co.auntypasty.openweather2.viewmodel.CitySummaryModel
 
 /**
@@ -33,7 +30,6 @@ class MainCityListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: CityListViewAdapter
-  //  private lateinit var cityListViewModel: CityListViewModel
     private val cityListViewModel: CityListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,10 +38,6 @@ class MainCityListActivity : AppCompatActivity() {
 
         binding.cityList.addItemDecoration(ListDividerItemDecoration(this))
 
-        // Improve with DI
-        val repository = CityListFetcherImpl()
-        val factory = CityListViewModelFactory(repository)
-        //cityListViewModel = ViewModelProvider(this, factory)[CityListViewModel::class.java]
         binding.mainModel = cityListViewModel
         binding.lifecycleOwner = this
 
@@ -128,20 +120,4 @@ class MainCityListActivity : AppCompatActivity() {
             imm.showSoftInput(binding.searchBox, InputMethodManager.SHOW_IMPLICIT)
         }
     }
-
-//    /**
-//     * Initiates a search from a passed in string. Calls the presenter with the search term.
-//     * @param searchText
-//     */
-//    fun updateContentsFromSearch(searchText: String) {
-//
-//        binding.citysearchHeader.visibility = View.VISIBLE
-//
-//        if (Utils.isConnected) {  // Do a network connectivity check
-//            binding.citysearchHeader.text = getText(R.string.searching)
-//          //  TODO mCityListPresenter!!.sendRequestCitiesFromString(searchText)
-//        } else {
-//            binding.citysearchHeader.setText(R.string.no_connection)
-//        }
-//    }
 }

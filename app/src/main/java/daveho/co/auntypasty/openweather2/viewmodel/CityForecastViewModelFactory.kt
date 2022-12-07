@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import daveho.co.auntypasty.openweather2.repository.CityForecastFetcherImpl
 import java.lang.IllegalArgumentException
 
+@Deprecated("Not required with DI")
 class CityForecastViewModelFactory(
     private val repository: CityForecastFetcherImpl
 ): ViewModelProvider.Factory {

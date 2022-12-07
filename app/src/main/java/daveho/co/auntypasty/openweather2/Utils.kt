@@ -3,18 +3,16 @@ package daveho.co.auntypasty.openweather2
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.util.Log
-import com.google.gson.Gson
 import daveho.co.auntypasty.openweather2.ApplicationModule.applicationContext
 import daveho.co.auntypasty.openweather2.model.Direction
-import org.json.JSONObject
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Utils {
-    private val TAG = Utils::class.java.getSimpleName()
 
+    const val API_KEY = "0497274abf259fbde9f33eb8dca36cbc"
+    const val BASE_URL: String = "https://api.openweathermap.org/data/2.5/"
     /**
      * Use Connectivity Manager to detect whether the app is connected to a network
      * regardless of connection type.

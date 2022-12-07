@@ -1,15 +1,18 @@
 package daveho.co.auntypasty.openweather2.repository
 
+import daveho.co.auntypasty.openweather2.Utils
 import daveho.co.auntypasty.openweather2.model.CitySummary
 import daveho.co.auntypasty.openweather2.model.WeatherList
-import daveho.co.auntypasty.openweather2.network.RetrofitClientInstance
-import java.time.Instant
+import daveho.co.auntypasty.openweather2.network.ApiService
 import java.util.*
+import javax.inject.Inject
 
-class CityListFetcherImpl: CityListFetcher {
+class CityListFetcherImpl @Inject constructor(
+    val apiService: ApiService
+): CityListFetcher {
 
     override suspend fun findCitiesWithSearchString(searchString: String): List<CitySummary> {
-        val response = RetrofitClientInstance.apiService.citySearch(RetrofitClientInstance.API_KEY, "metric", searchString)
+        val response = apiService.citySearch(Utils.API_KEY, "metric", searchString)
 
         return if (!response.list.isNullOrEmpty()) {
             response.list.map {

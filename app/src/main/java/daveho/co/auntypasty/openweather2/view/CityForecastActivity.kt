@@ -4,13 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import daveho.co.auntypasty.openweather2.R
 import daveho.co.auntypasty.openweather2.databinding.ActivityCityForecastBinding
-import daveho.co.auntypasty.openweather2.repository.CityForecastFetcherImpl
-import daveho.co.auntypasty.openweather2.repository.CityListFetcherImpl
 import daveho.co.auntypasty.openweather2.viewmodel.*
 
 @AndroidEntryPoint
@@ -27,10 +24,6 @@ class CityForecastActivity : AppCompatActivity() {
 
         binding.forecastList.addItemDecoration(ListDividerItemDecoration(this))
 
-        // Improve with DI
-        val repository = CityForecastFetcherImpl()
-        val factory = CityForecastViewModelFactory(repository)
-       // cityForecastViewModel = ViewModelProvider(this, factory)[CityForecastViewModel::class.java]
         binding.forecastModel = cityForecastViewModel
         binding.lifecycleOwner = this
 

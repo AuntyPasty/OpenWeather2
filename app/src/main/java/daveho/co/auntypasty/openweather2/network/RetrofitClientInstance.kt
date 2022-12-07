@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+@Deprecated("Not required with DI")
 object RetrofitClientInstance {
 
     const val API_KEY = "0497274abf259fbde9f33eb8dca36cbc"

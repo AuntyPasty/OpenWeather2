@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import daveho.co.auntypasty.openweather2.network.ApiService
 import daveho.co.auntypasty.openweather2.repository.CityForecastFetcher
 import daveho.co.auntypasty.openweather2.repository.CityForecastFetcherImpl
 import daveho.co.auntypasty.openweather2.repository.CityListFetcher
@@ -14,9 +15,9 @@ import daveho.co.auntypasty.openweather2.repository.CityListFetcherImpl
 class AppModule {
 
     @Provides
-    fun providesCityForecastFetcher(): CityForecastFetcher = CityForecastFetcherImpl()
+    fun providesCityForecastFetcher(api: ApiService): CityForecastFetcher = CityForecastFetcherImpl(api)
 
     @Provides
-    fun providesCityListFetcher(): CityListFetcher = CityListFetcherImpl()
+    fun providesCityListFetcher(api: ApiService): CityListFetcher = CityListFetcherImpl(api)
 
 }
