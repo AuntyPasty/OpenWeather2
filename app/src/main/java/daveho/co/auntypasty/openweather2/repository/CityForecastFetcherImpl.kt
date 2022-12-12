@@ -14,29 +14,12 @@ class CityForecastFetcherImpl @Inject constructor(
         val response = apiService.cityForecast(Utils.API_KEY, "metric", id)
 
         return response.toDomain()
-
     }
 
     private fun CityForecastResponse.toDomain() = CityForecast(
         id = city!!.id ?: 0,
         cityName = city!!.name ?: "Unknown city name",
-        country = getCountryStringFromCode(city!!.country?: ""),
+        country = Utils.getCountryStringFromCode(city!!.country?: ""),
         weatherList = list ?: emptyList(),
     )
-
-    /**
-     * Takes a country code and converts it to the country name string
-     * @param code country code
-     * @return country name string
-     */
-    private fun getCountryStringFromCode(code: String?): String {
-
-        return if (code != null) {
-            val locale = Locale("", code)
-
-            locale.displayCountry
-        } else {
-            "Unknown"
-        }
-    }
 }
