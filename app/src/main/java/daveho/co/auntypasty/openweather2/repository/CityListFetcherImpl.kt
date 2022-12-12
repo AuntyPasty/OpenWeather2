@@ -26,7 +26,7 @@ class CityListFetcherImpl @Inject constructor(
     private fun WeatherList.toDomain(): CitySummary = CitySummary(
         id = id ?: 0,
         cityName = name ?: "Unknown name",
-        country = getCountryStringFromCode(sys!!.country),
+        country = Utils.getCountryStringFromCode(sys!!.country),
         weatherTime = dt ?: 0,
         tempCelcius = main!!.temp ?: 0f,
         windSpeedMps = wind!!.speed ?: 0f,
@@ -34,19 +34,4 @@ class CityListFetcherImpl @Inject constructor(
         weatherDescription = weather!![0].description ?: "Unknown description"
     )
 
-    /**
-     * Takes a country code and converts it to the country name string
-     * @param code country code
-     * @return country name string
-     */
-    fun getCountryStringFromCode(code: String?): String {
-
-        return if (code != null) {
-            val locale = Locale("", code)
-
-            locale.displayCountry
-        } else {
-            "Unknown"
-        }
-    }
 }

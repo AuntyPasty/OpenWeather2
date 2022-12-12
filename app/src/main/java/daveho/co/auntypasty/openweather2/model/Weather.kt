@@ -3,18 +3,18 @@ package daveho.co.auntypasty.openweather2.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Weather {
+data class Weather (
 
     @SerializedName("id")
     @Expose
-    var id: Int? = null
+    var id: Int? = null,
     @SerializedName("main")
     @Expose
-    var main: String? = null
+    var main: String? = null,
     @SerializedName("description")
     @Expose
-    var description: String? = null
+    var description: String? = null,
     @SerializedName("icon")
     @Expose
-    var icon: String? = null
-}
+    var icon: String? = null,
+)

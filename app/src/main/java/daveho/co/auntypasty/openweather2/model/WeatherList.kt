@@ -3,43 +3,42 @@ package daveho.co.auntypasty.openweather2.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class WeatherList {
+data class WeatherList (
 
     @SerializedName("id")
     @Expose
-    var id: Int? = null
+    var id: Int? = null,
     @SerializedName("name")
     @Expose
-    var name: String? = null
+    var name: String? = null,
     @SerializedName("coord")
     @Expose
-    var coord: Coord? = null
+    var coord: Coord? = null,
     @SerializedName("main")
     @Expose
-    var main: Main? = null
+    var main: Main? = null,
     @SerializedName("dt")
     @Expose
-    var dt: Int? = null
+    var dt: Int? = null,
     @SerializedName("wind")
     @Expose
-    var wind: Wind? = null
+    var wind: Wind? = null,
     @SerializedName("sys")
     @Expose
-    var sys: Sys? = null
+    var sys: Sys? = null,
     @SerializedName("rain")
     @Expose
-    var rain: Any? = null
+    var rain: Any? = null,
     @SerializedName("snow")
     @Expose
-    var snow: Snow? = null
+    var snow: Snow? = null,
     @SerializedName("clouds")
     @Expose
-    var clouds: Clouds? = null
+    var clouds: Clouds? = null,
     @SerializedName("weather")
     @Expose
-    var weather: MutableList<Weather>? = null
+    var weather: MutableList<Weather>? = null,
     @SerializedName("dt_txt")
     @Expose
     var dtTxt: String? = null
-
-}
+)

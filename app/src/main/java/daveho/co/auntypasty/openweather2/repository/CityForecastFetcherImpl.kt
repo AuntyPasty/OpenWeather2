@@ -19,7 +19,7 @@ class CityForecastFetcherImpl @Inject constructor(
     private fun CityForecastResponse.toDomain() = CityForecast(
         id = city!!.id ?: 0,
         cityName = city!!.name ?: "Unknown city name",
-        country = Utils.getCountryStringFromCode(city!!.country?: ""),
+        country = Utils.getCountryStringFromCode(city!!.country?: "Unknown country"),
         weatherList = list ?: emptyList(),
     )
 }
